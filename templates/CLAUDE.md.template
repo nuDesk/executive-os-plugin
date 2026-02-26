@@ -1,0 +1,70 @@
+# Global Context for Claude Code
+
+## Who I Am
+- [Your Name], [Your Role] at [Company]
+- [Brief description of how you work — technical level, what you build]
+
+## How I Work
+- I use Claude Code for: [your primary use cases]
+- Primary language: [your language]
+- [Any preferences for how Claude should communicate]
+
+## My Stack
+- [List your tools, platforms, integrations]
+- Asana for project management
+- Google Workspace (Gmail, Drive, Sheets, Docs)
+- HubSpot CRM (if applicable)
+
+## Company Context
+- [Company Name] — [one-line description]
+- [Key clients or accounts]
+- [Key initiatives]
+
+## Strategic Goals
+- [Goal 1]
+- [Goal 2]
+- [Goal 3]
+
+## Priorities
+
+**last_updated:** [YYYY-MM-DD]
+
+> If `last_updated` is more than 7 days ago, ask if I'd like to update priorities or offer to pull current tasks from Asana.
+
+1. **[Priority 1]** — [Brief description]
+2. **[Priority 2]** — [Brief description]
+3. **[Priority 3]** — [Brief description]
+
+## Working Memory
+
+### People
+| Name | Who |
+|------|-----|
+| **[Name]** | [Full Name] — [Role, Company] |
+| **[Name]** | [Full Name] — [Role, Company] |
+
+### Terms
+| Term | Meaning |
+|------|---------|
+| **[TERM]** | [What it means] |
+| **[TERM]** | [What it means] |
+
+### Clients
+| Client | Context |
+|--------|---------|
+| **[Client]** | [Brief context] |
+
+## Preferences
+- [Your workflow preferences]
+- Use .env files for secrets — never hardcode API keys
+
+## Integration Config
+
+These values are used by Executive OS commands and skills:
+
+| Key | Value |
+|-----|-------|
+| **Email** | [your-email@company.com] |
+| **HubSpot Owner ID** | [your HubSpot owner ID, if applicable] |
+| **Report Recipient** | [Name of person who receives your weekly report] |
+| **Report Task Name** | [Name of recurring Asana task for weekly reports] |

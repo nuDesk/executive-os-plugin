@@ -1,0 +1,106 @@
+---
+description: Generate a prioritized daily plan from Asana, Calendar, Gmail, Fireflies, and HubSpot
+allowed-tools: Read, Grep, Glob, Bash, Write, Edit
+---
+
+Generate the user's prioritized daily plan. This is the morning command — scan all sources, synthesize, and deliver a ranked action list with effort tags.
+
+## Step 1: Load Context
+
+Read `~/.claude/CLAUDE.md` to load:
+- **User profile** — name, email, role from the "Who I Am" section
+- **Current priorities** — from the "Priorities" section (strategic lens for ranking)
+- **Working Memory** — people, terms, clients from the "Working Memory" section
+- **Integration config** — email address, HubSpot owner ID, and other service identifiers
+
+Pay special attention to the "Priorities" section — these are the strategic lens for ranking everything.
+
+## Step 2: Pull Data from All Sources (in parallel where possible)
+
+### Asana — Today's Tasks + Overdue
+Load Asana GIDs from `~/.claude/memory/asana-config.md` for all workspace, user, and custom field references.
+
+Search for tasks assigned to me:
+- Due today or overdue (`due_on_before`: today, `completed`: false)
+- Use `asana_search_tasks` with `assignee_any`: "me", workspace GID from config
+- Include opt_fields: name, due_on, projects.name, custom_fields
+
+Also check for tasks in "Agent Queue" status (these should be called out separately as automatable).
+
+### Google Calendar — Today's Schedule
+Use the **google-workspace MCP server** (NOT claude.ai connectors). Call `get_events` with:
+- `user_google_email`: the user's email from CLAUDE.md
+- `calendar_id`: `primary`
+- `time_min` / `time_max`: today's date boundaries (ISO 8601, UTC)
+- `max_results`: 25
+
+Map committed time blocks and note gaps available for focused work.
+
+**If auth is needed:** The tool will return an authorization URL. Present it to the user and note "Calendar data unavailable — Google Workspace MCP needs re-auth."
+
+### Gmail — Flagged/Important Unread
+Use the **google-workspace MCP server** (NOT claude.ai connectors). Call `search_gmail_messages` with:
+- `user_google_email`: the user's email from CLAUDE.md
+- `query`: `to:<user-email> is:important is:unread newer_than:1d`
+- `page_size`: 15
+
+Prioritize messages from known contacts listed in CLAUDE.md Working Memory. Flag anything that looks time-sensitive or requires a response.
+
+**If auth is needed:** Present the authorization URL and note "Gmail data unavailable — Google Workspace MCP needs re-auth."
+
+### Fireflies — Recent Meeting Action Items
+Use `fireflies_get_transcripts` for the past 2 days. Extract action items assigned to the user from meeting summaries. These represent commitments that need follow-through.
+
+### HubSpot — My Deals & Tasks Only
+Use HubSpot MCP tools filtered to the user's HubSpot owner ID (from CLAUDE.md). Do NOT show deals or tasks owned by other team members.
+
+**Deals:** Search for open deals where `hubspot_owner_id` = user's owner ID and dealstage is not closedwon/closedlost. Include properties: dealname, dealstage, closedate, amount, notes_last_updated. Sort by closedate ascending.
+
+**Tasks:** Search for HubSpot tasks (objectType: `tasks`) where `hubspot_owner_id` = user's owner ID and `hs_task_status` != `COMPLETED`. Include properties: hs_task_subject, hs_task_status, hs_timestamp, hs_task_priority.
+
+Keep this lightweight — only surface items needing attention.
+
+## Step 3: Synthesize and Rank
+
+Apply the executive-planning skill's prioritization framework. Cross-reference all sources against CLAUDE.md priorities:
+
+1. **Commitments with deadlines** — meetings, deliverables due today
+2. **Strategic priority items** — tasks aligned with top CLAUDE.md priorities
+3. **Relationship maintenance** — emails/follow-ups with key stakeholders
+4. **Pipeline items** — BD or HubSpot items needing movement
+5. **Operational tasks** — admin, routine items
+
+## Step 4: Present the Daily Plan
+
+Output format — clean, scannable, no fluff:
+
+```
+DAILY PLAN — [Today's Date]
+
+CALENDAR
+[List today's meetings with times, or "No calendar data available"]
+
+PRIORITY ACTIONS (ranked)
+1. [Task/action] — [source] — [effort: 15m/30m/1hr/2hr/deep work]
+2. [Task/action] — [source] — [effort tag]
+3. ...
+
+EMAILS NEEDING RESPONSE
+- [Sender]: [Subject snippet] — [urgency: now/today/this week]
+
+AGENT QUEUE (automatable)
+- [Tasks that can be run via /run-tasks]
+
+WATCH LIST (not urgent but track)
+- [Items to keep on radar]
+```
+
+Keep the total list to **no more than 10 priority actions**. If there are more, group lower-priority items under "Watch List."
+
+## Step 5: Interactive Handoff
+
+After presenting the plan, ask:
+
+"Which task would you like to start with?"
+
+This allows Claude to help work through tasks conversationally — whether that's drafting an email, researching a topic, or executing an Asana task.

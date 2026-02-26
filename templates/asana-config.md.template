@@ -1,0 +1,84 @@
+# Asana Configuration
+
+Shared reference for all commands and skills that interact with Asana.
+All GIDs verified [DATE].
+
+## Workspace
+
+| Field | Value |
+|-------|-------|
+| **Workspace** | [your-workspace.com] |
+| **Workspace GID** | `[workspace-gid]` |
+
+## Users
+
+| Name | GID | Notes |
+|------|-----|-------|
+| **[Your Name]** | `[your-user-gid]` | Primary user (me) |
+| **[Report Recipient]** | `[their-user-gid]` | Tagged on weekly reports |
+
+## Custom Fields
+
+### Task Progress (GID: `[field-gid]`)
+
+| Status | GID |
+|--------|-----|
+| Not Started | `[gid]` |
+| Agent Queue | `[gid]` |
+| In Progress | `[gid]` |
+| Pending Review | `[gid]` |
+| Waiting | `[gid]` |
+| Deferred | `[gid]` |
+| Done | `[gid]` |
+
+### Type (GID: `[field-gid]`)
+
+| Type | GID |
+|------|-----|
+| [Type 1] | `[gid]` |
+| [Type 2] | `[gid]` |
+| [Type 3] | `[gid]` |
+
+### Priority (GID: `[field-gid]`)
+
+| Priority | GID |
+|----------|-----|
+| High | `[gid]` |
+| Medium | `[gid]` |
+| Low | `[gid]` |
+
+## Projects — Smart Routing Table
+
+Use these GIDs for direct task creation instead of typeahead searches.
+
+### Client Projects
+
+| Project | GID | Route When |
+|---------|-----|------------|
+| [Client Name] | `[gid]` | [keywords, people names that trigger routing here] |
+
+### Internal Projects
+
+| Project | GID | Route When |
+|---------|-----|------------|
+| [Project Name] | `[gid]` | [keywords that trigger routing here] |
+
+### Fallback
+
+If no routing match is found, ask the user which project to use. Present the most likely options based on context.
+
+## API Notes
+
+- Use `notes` field (plain text) for task descriptions — `html_notes` rejects complex HTML structures
+- Custom fields are set via JSON string: `{"field_gid": "enum_option_gid"}`
+- Always set Task Progress, Type, and Priority when creating tasks
+
+## How to Find Your GIDs
+
+You can find GIDs by:
+1. Opening Asana in a browser and looking at URLs (the numeric ID is the GID)
+2. Using the Asana API: `GET /workspaces` for workspace GID
+3. Using the Asana API: `GET /users/me` for your user GID
+4. Using the Asana API: `GET /projects` for project GIDs
+5. Using the Asana API: `GET /custom_fields` on a project for custom field GIDs
+6. Or ask Claude to help discover them using the Asana MCP tools
