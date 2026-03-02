@@ -62,8 +62,50 @@ Keep this lightweight — only surface items needing attention.
 
 ## Step 3: Synthesize and Rank
 
-Apply the executive-planning skill's prioritization framework. Cross-reference all sources against CLAUDE.md priorities:
+Apply the 4-tier prioritization framework below. Cross-reference all sources against CLAUDE.md priorities.
 
+### Tier 1: Non-Negotiable (do first)
+- Calendar commitments (meetings, calls)
+- Client deliverable deadlines
+- Commitments made in recent meetings (Fireflies action items)
+- Anything blocking someone else's work
+
+### Tier 2: Strategic (do today)
+- Items aligned with CLAUDE.md top priorities
+- Revenue-impacting activities (pipeline, BD, client relationships)
+- Tasks that have been overdue >2 days
+
+### Tier 3: Important (schedule this week)
+- Operational tasks (invoicing, compliance, admin)
+- Internal process improvements
+- Content and marketing activities
+
+### Tier 4: Delegate or Defer
+- Tasks assignable to team members (check CLAUDE.md Working Memory for team)
+- Low-urgency follow-ups
+- Nice-to-have improvements
+
+### Effort Tags
+
+Assign one tag to each action item:
+
+| Tag | Duration | Type |
+|-----|----------|------|
+| 15m | Under 15 minutes | Quick reply, approval, review |
+| 30m | 15-30 minutes | Short task, email draft, brief call |
+| 1hr | 30-60 minutes | Focused task, document review, planning |
+| 2hr | 1-2 hours | Deep deliverable, analysis, strategy |
+| Deep | 2+ hours | Major project work, complex creation |
+
+### Context Awareness
+
+When synthesizing, account for:
+- **Calendar density** — Heavy meeting days mean only quick tasks fit in gaps
+- **Energy management** — Front-load strategic/creative work, back-load admin
+- **Stakeholder urgency** — Requests from key contacts (listed in CLAUDE.md) get elevated; internal admin gets deferred
+- **Momentum** — If a project has been stalled, consider prioritizing to unblock
+
+### Synthesis Order
 1. **Commitments with deadlines** — meetings, deliverables due today
 2. **Strategic priority items** — tasks aligned with top CLAUDE.md priorities
 3. **Relationship maintenance** — emails/follow-ups with key stakeholders
@@ -99,8 +141,14 @@ Keep the total list to **no more than 10 priority actions**. If there are more, 
 
 ## Step 5: Interactive Handoff
 
-After presenting the plan, ask:
+After presenting the plan:
 
-"Which task would you like to start with?"
+1. If Agent Queue tasks exist, prompt:
+
+   "You have [N] tasks in Agent Queue. Want me to run /run-tasks as a background agent while you work on your priority items?"
+
+   If yes: Launch /run-tasks via the Agent tool with run_in_background=true, then continue the interactive session with the user on their priority actions.
+
+2. Ask: "Which task would you like to start with?"
 
 This allows Claude to help work through tasks conversationally — whether that's drafting an email, researching a topic, or executing an Asana task.

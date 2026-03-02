@@ -1,14 +1,16 @@
 ---
 name: executive-planning
 description: >
-  Executive-level prioritization framework. Use when the user asks to "plan my day", "organize my
-  priorities", "what should I focus on", "help me prioritize", "triage my tasks", or needs
-  help determining what to work on next. Synthesizes signals from Asana, Calendar, Gmail,
-  Fireflies, and HubSpot into ranked action plans.
-version: 1.0.0
+  Reference document: Executive-level prioritization framework. This framework is embedded directly
+  in /daily-plan, /strategic-review, and /weekly-report commands. Do NOT invoke this skill
+  directly — use the appropriate command instead.
+version: 2.0.0
 ---
 
 # Executive Planning
+
+> Note: This skill is a reference document only. It is not invoked directly.
+> To plan your day: /daily-plan. For strategic planning: /strategic-review. For weekly reporting: /weekly-report.
 
 Prioritization framework for synthesizing signals from Asana, Calendar, Gmail, Fireflies, and HubSpot into a clear daily action plan. Designed for an executive managing multiple client accounts, internal operations, and business development simultaneously.
 

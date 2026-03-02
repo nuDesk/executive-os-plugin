@@ -4,21 +4,22 @@ An executive operating system for Claude Code. Turns Claude into a daily operato
 
 ## What It Does
 
-| Command | Description |
-|---------|-------------|
-| `/executive-os:daily-plan` | Morning planning — pulls from Asana, Calendar, Gmail, Fireflies, and HubSpot to generate a prioritized daily action list |
-| `/executive-os:run-tasks` | Executes today's Asana "Agent Queue" tasks sequentially with skill matching and user sign-off |
-| `/executive-os:log-task` | Quick-capture an Asana task with smart project routing from a one-line description |
-| `/executive-os:weekly-report` | Generates a weekly executive progress report from all data sources and posts it to Asana |
-| `/executive-os:session-closeout` | End-of-session wrap-up — captures tasks, updates memory, logs learnings |
+| Command | Cadence | Description |
+|---------|---------|-------------|
+| `/executive-os:daily-plan` | Daily | Morning planning — pulls from Asana, Calendar, Gmail, Fireflies, and HubSpot to generate a prioritized daily action list |
+| `/executive-os:strategic-review` | Weekly/bi-weekly | Strategic planning — 7-30 day task landscape, undated task audit, calendar density, pipeline health, and strategic themes |
+| `/executive-os:weekly-report` | Weekly | Generates a weekly executive progress report from all data sources and posts it to Asana |
+| `/executive-os:run-tasks` | As needed | Executes today's Asana "Agent Queue" tasks sequentially with skill matching and user sign-off |
+| `/executive-os:log-task` | As needed | Quick-capture an Asana task with smart project routing from a one-line description |
+| `/executive-os:session-closeout` | End of session | End-of-session wrap-up — captures tasks, updates memory, logs learnings |
 
-## Skills (auto-triggered)
+## Skills
 
-| Skill | Triggers On |
-|-------|-------------|
-| **executive-planning** | "plan my day", "help me prioritize", "what should I focus on" |
-| **asana-agent** | "run my tasks", "check my Asana queue", "process today's tasks" |
-| **memory-management** | "remember this", "who is X", "what does X mean" |
+| Skill | Type | Description |
+|-------|------|-------------|
+| **executive-planning** | Reference | Prioritization framework (embedded in commands, not invoked directly) |
+| **asana-agent** | Auto-triggered | "run my tasks", "check my Asana queue", "process today's tasks" |
+| **memory-management** | Auto-triggered | "remember this", "who is X", "what does X mean" |
 
 ## Prerequisites
 
@@ -100,13 +101,17 @@ This means:
 - The plugin adapts to your role, your clients, your priorities
 - Memory grows organically as you work — the session-closeout command suggests updates
 
-## Recommended Daily Workflow
+## Recommended Workflow
 
+### Daily
 1. **Morning:** `/executive-os:daily-plan` — Get your prioritized action list
 2. **During the day:** `/executive-os:log-task` — Quick-capture tasks as they come up
 3. **Task execution:** `/executive-os:run-tasks` — Process your agent queue
 4. **End of session:** `/executive-os:session-closeout` — Capture tasks, update memory
-5. **End of week:** `/executive-os:weekly-report` — Generate and post your report
+
+### Weekly
+5. **Mid-week or as needed:** `/executive-os:strategic-review` — 7-30 day strategic planning + undated task hygiene
+6. **End of week:** `/executive-os:weekly-report` — Generate and post your report (skips redundant data pulls if strategic-review already ran)
 
 ## License
 

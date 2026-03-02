@@ -102,11 +102,21 @@ Ask questions selectively based on what the automated data doesn't cover.
 
 Instead of asking a blank question, synthesize a data-driven priority suggestion from everything gathered so far (Asana tasks, Fireflies action items, user input from Step 6) plus forward-looking signals. This follows the same pattern as `/daily-plan` Step 3 but scoped to the upcoming week.
 
+### Step 7-pre: Check for Recent Strategic Review
+
+Ask: "Did you run a /strategic-review this week?"
+
+**If yes:** Skip Step 7a entirely (Calendar, HubSpot, Gmail pulls are redundant — strategic-review already gathered this data). Use strategic themes from the review as the basis for upcoming week priorities. Proceed directly to Step 7b.
+
+**If no:** Proceed with Step 7a as written (self-sufficient fallback).
+
 ### Step 7a: Pull Forward-Looking Signals
 
 Pull three additional data sources to inform next-week priorities. Each has a graceful fallback — never block the report on a missing connector.
 
 #### HubSpot — Upcoming Pipeline Activity
+Filter all HubSpot queries to the user's deals/tasks only (use `hubspot_owner_id` from CLAUDE.md).
+
 Use HubSpot MCP tools to check for:
 - Deals with close dates in the next 14 days
 - Deals with recent activity (last 7 days) that may need follow-up
@@ -136,7 +146,7 @@ Focus on threads >24hrs old without a response. Prioritize messages from known c
 
 ### Step 7b: Synthesize Using Executive Planning Framework
 
-Apply the executive-planning skill's 4-tier prioritization framework, adapted for weekly scope. Cross-reference all gathered data against CLAUDE.md priorities and strategic goals.
+Apply the 4-tier prioritization framework below, adapted for weekly scope. Cross-reference all gathered data against CLAUDE.md priorities and strategic goals.
 
 #### Tier 1: Carry-Forward Commitments (must do)
 - Unfulfilled Fireflies action items from this week's meetings
