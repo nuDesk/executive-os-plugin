@@ -59,9 +59,11 @@ Apply smart routing logic from `~/.claude/memory/asana-config.md`. The config fi
 
 Only suggest tasks that are genuinely material — skip trivial or already-tracked items.
 
-Wait for user confirmation. Create only approved tasks using Asana MCP tools. When creating, include the subtask bullets in the Asana task description (in `html_notes` format).
-
 **Config:** Load Asana GIDs from `~/.claude/memory/asana-config.md` for workspace, user, project, and custom field GIDs.
+
+**IMPORTANT: STOP HERE.** Present the suggested tasks and wait for the user to respond (create all / select numbers / skip / modify). Do NOT proceed to Step 3 until the user has confirmed their task choices and tasks have been created (or skipped). This is a hard gate — Steps 3-5 only run after the user responds to Step 2.
+
+When the user responds, create only approved tasks using Asana MCP tools. Include the subtask bullets in the Asana task description (in `html_notes` format). If the user provides modifications (different deadlines, project routing, etc.), apply those before creating.
 
 ## Step 3: Update Memory
 
