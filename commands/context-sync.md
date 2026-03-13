@@ -1,3 +1,9 @@
+---
+description: Gather a 7-day cross-system briefing — git, Asana, Calendar, Gmail, Chat
+argument-hint: [optional focus area]
+allowed-tools: Read, Grep, Glob, Bash
+---
+
 Gather context from the last 7 days across my systems to produce a "state of the world" briefing for the current project.
 
 Focus area (optional): $ARGUMENTS
